@@ -14,5 +14,3 @@ i want this to be Object Oriented as much as it can but still need to be able to
 have fun :D
 
 
-NEED TO UPLOAD FILES
-doing that within 2 days.
