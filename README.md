@@ -12,3 +12,7 @@ things that i think should be added:
 
 i want this to be Object Oriented as much as it can but still need to be able to handle an awesome games.
 have fun :D
+
+
+NEED TO UPLOAD FILES
+doing that within 2 days.
