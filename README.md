@@ -5,7 +5,6 @@ a game framework made in java.
 i been wanting to make my own open source project so i made this. 
 hope it helps you make great games in java.
 
-to try test this you gonna need a image named "bullet.png" in the same foler as the compiled version.
 
 things that i think should be added:
   simple and handled networking.
