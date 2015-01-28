@@ -1,6 +1,9 @@
 TyGF
 ====
+I am a amature programmer making a game framework for fun. Learning as i go use it if you like. 
 
-a game framework made in java.
-i been wanting to make my own open source project so i made this.
-even though its crap i still enjoyed making it.
+
+When I feel i have made it good enough i might try to make a game.
+
+
+
