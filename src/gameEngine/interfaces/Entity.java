@@ -13,8 +13,19 @@ public abstract class Entity implements Serializable {
 	private String ImageName;
 	private Image myImage;
 	private boolean MarkForRemovel;
+	public long last=0;
 	
 	
+	protected double getDeltaTime(){
+		
+	return (last-System.nanoTime())/1000000000.0;
+	}
+	
+	protected void End(){
+		
+	last=System.nanoTime();	
+	
+	}
 	
 	public Entity(double x, double y, String imageName) {
 		super();
@@ -33,7 +44,7 @@ public abstract class Entity implements Serializable {
 	}
 	}
 
-	public abstract void DoLogic(long delta);
+	public abstract void DoLogic();
 	
 	
 	
@@ -104,18 +115,16 @@ public abstract class Entity implements Serializable {
 		MarkForRemovel = markForRemovel;
 	}
 	
-	public void doMovement(long delta){
-		double dDelta = delta;
-		dDelta/=1000000;
+	public void doMovement(){
 		
-		X+=DX*dDelta;
-		Y+=DY*dDelta;
-		//System.out.println("x"+X);
+		X+=DX*getDeltaTime();
+		Y+=DY*getDeltaTime();
+		//System.out.println("x"+DY);
 	}
 	
 	public void addVel(double dx,double dy){
-		this.DX+=dx/1000; //divie it by 1000 so it accelerates at 1 pixel a second
-		this.DY+=dy/1000;
+		this.DX+=dx*getDeltaTime();
+		this.DY+=dy*getDeltaTime();
 		
 	}
 	

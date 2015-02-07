@@ -1,44 +1,57 @@
 package gameEngine;
 
 import game.entities.test;
+import game.renderLayers.RenderLayerList;
 import gameEngine.interfaces.Entity;
+import gameEngine.interfaces.Level;
 
+
+import java.awt.Canvas;
 import java.awt.Point;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class Game {
+	
+	private static Thread Graphics;
+	private static Thread logic;
+	
 private volatile static Point mouseLoc=new Point(0,0);
-private volatile static List<Entity> entities=new ArrayList<Entity>();
+
 private volatile static char[] keylist = {'a','d','s','w',' ','p'};
 private volatile static boolean[] keypress=new boolean[keylist.length];
 private volatile static boolean[] mouseClicks= new boolean[3];
+private volatile static Level StartLevel; 
+
+
+
 
 private static volatile boolean Unpuased=true;
-//private static URL resources;
-
+	static GameGraphics gg;
+	static GameLogicThread lt;
 	public static void main(String[] args) {
-		Thread Graphics = new Thread(new GameGraphics());
-		Thread logic = new Thread(new GameLogicThread());
+		lt = new GameLogicThread();
+		 gg = new GameGraphics();
+		 Graphics = new Thread((Runnable)gg);
+		 logic = new Thread(lt);
 		
-		//resources =Game.class.getClassLoader().getResource("src/images/");
-		
-		//Graphics.setPriority(6);
-		//logic.setPriority(10);
 		logic.start();
-		//System.out.println(logic.isAlive());
 		Graphics.start();
-		entities.add(new test(0,0,"bullet.png"));
-		//entities.add(new test(50,50,"src/images/bullet.png"));
-		//entities.add(new test(50,50,"src/images/bullet.png"));
+		
+		RenderLayerList.AddLayers();
+		
+		//entities.add(new test(0,0,"bullet.png"));
 	}
 
-	public static List<Entity> getEntities() {
-		return entities;
+	public static Canvas getGraphics() {
+		return gg;
 	}
+
+	//public static List<Entity> getEntities() {
+		//return entities;
+	//}
 
 	public static boolean unpuased() {
 		return Unpuased;
@@ -80,6 +93,8 @@ private static volatile boolean Unpuased=true;
 		return false;
 	}
 
+	
+	
 	public static boolean getMouseClicks(int i) {
 		return mouseClicks[i];
 	}

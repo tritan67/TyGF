@@ -1,11 +1,14 @@
 package gameEngine;
+import game.renderLayers.RenderLayerList;
+import gameEngine.interfaces.RenderLayer;
+
 import java.awt.Canvas;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.awt.Dimension;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
+//import java.awt.Image;
 //import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -27,8 +30,9 @@ public class GameGraphics extends Canvas implements Runnable {
 	private static final long serialVersionUID = 5510581710345277592L;
 	private BufferStrategy strategy;
 	private Graphics2D g2;
+	
+	
 	//private Point mouseLoc;
-	private double FPS;
 	
 	
 	
@@ -60,45 +64,33 @@ public class GameGraphics extends Canvas implements Runnable {
 	createBufferStrategy(2);
 	strategy = getBufferStrategy();
 	
-	long last = 0;
 	
-	Image entImage;
-	int x;
-	int y;
+	
 	
 	while(true){
-		Game.setMouseLoc(this.getMousePosition());
+		Game.setMouseLoc(this.getMousePosition());// sends mouse location to Game or value storage.
 		window.requestFocus();
+		
 		g2=(Graphics2D) strategy.getDrawGraphics();
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0,0, 800, 600);
 		
 		
-		
-		
-		g2.setColor(new Color(255,255,255));
-		g2.drawString("its working:"+FPS, 5, 15);
-		for(int i1 =0;i1<Game.getEntities().size();i1++){
-			x=(int) Game.getEntities().get(i1).getX(); //get the float valus and covert them to int for rendering.
-			y=(int) Game.getEntities().get(i1).getY();
-			entImage=Game.getEntities().get(i1).getMyImage(); // load image.
+		for (RenderLayer renderThis : RenderLayerList.getRenderLayers()){
 			
-			g2.drawImage(entImage,x,y,this);
-	}
+			renderThis.setDraw(g2);
+			renderThis.renderThisLayer();
+			
+		}
+		
+		
+		
+		
 		g2.dispose();
 		
 		strategy.show();
 		
-		
-		
-		FPS = (1000000.0/( System.nanoTime()-last));
-		last = System.nanoTime();
-		//last=time;
-		
 	
-		
-		
-		
 		
 	}
 		

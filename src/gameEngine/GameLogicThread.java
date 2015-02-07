@@ -1,14 +1,18 @@
 package gameEngine;
 
+import game.levels.TestLevel;
+import gameEngine.interfaces.Entity;
+import gameEngine.interfaces.Level;
+
 public class GameLogicThread implements Runnable {
 	volatile long  last;
+	private volatile static Level currentLevel = new TestLevel();
 	
 	
 	@Override
 	
 	
 	public void run() {
-		int x;
 		//int first=0;
 		System.out.println("imrunning");
 		
@@ -16,15 +20,22 @@ public class GameLogicThread implements Runnable {
 			try{Thread.sleep(5);} catch(Exception e){}
 			
 			
-			x=Game.getEntities().size();
 			
 			//System.out.println("imrunning");
 			
-			
-			for(int i =0;i<x;i++){
 				
-				Game.getEntities().get(i).DoLogic(Math.abs(last-System.nanoTime()));
-				last = System.nanoTime(); //saves current time for next calculation.
+				for(Entity E : currentLevel.getLevelEntities()){
+					E.DoLogic();
+					
+				}
+				
+			
+			for(Entity E : Level.getGameEntities()){
+				
+				E.DoLogic();
+				
+				
+				 //saves current time for next calculation.
 				
 			}
 			
@@ -34,13 +45,7 @@ public class GameLogicThread implements Runnable {
 		
 
 	}
-public void doCollision(){
-	
-	for(int i=0;i<Game.getEntities().size();i++){
-		
-		
-		
-	}
+
 	
 	
 	
@@ -48,4 +53,4 @@ public void doCollision(){
 	
 	
 }
-}
+

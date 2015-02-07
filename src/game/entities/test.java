@@ -23,7 +23,7 @@ public class test extends Entity {
 
 	@Override
 	
-	public void DoLogic(long Delta) {
+	public void DoLogic() {
 		if(Game.iskeypress('p')){
 		sound.play();	
 		}
@@ -32,19 +32,19 @@ public class test extends Entity {
 		
 		if(Game.iskeypress('w')){
 			
-			this.addVel(0, -1);
+			this.addVel(0, -50);
 		}
 		if(Game.iskeypress('s')){
 			
-			this.addVel(0, 1);
+			this.addVel(0, 50);
 		}
 		if(Game.iskeypress('a')){
 			
-			this.addVel(-1, 0);
+			this.addVel(-50, 0);
 		}
 		if(Game.iskeypress('d')){
 			
-			this.addVel(1, 0);
+			this.addVel(50, 0);
 		}
 		if(Game.getMouseClicks(0)){
 			//System.out.println("there");
@@ -57,8 +57,9 @@ public class test extends Entity {
 			//System.out.println("there");
 			this.addVel((Game.getMouseLoc().getX()-this.getX())/-200,(Game.getMouseLoc().getY()-this.getY())/-200);
 		}
-		doMovement(Delta);
+		doMovement();
 		//System.out.println("hello");
+		End();
 
 	}
 
