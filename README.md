@@ -5,5 +5,7 @@ I am a amature programmer making a game framework for fun. Learning as I go. Use
 
 When I feel I have made it good enough I might try to make a game.
 
+Made By Tyler Dow
+
 
 
